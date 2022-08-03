@@ -1,5 +1,5 @@
 #include <iostream>
-
+using namespace std;
 class Node
 {
 public:
@@ -12,8 +12,8 @@ public:
 	}
 };
 
-using namespace std;
-#include "solution.h"
+
+
 
 Node *takeinput()
 {
