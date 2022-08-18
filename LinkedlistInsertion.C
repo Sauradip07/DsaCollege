@@ -1,93 +1,74 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 struct node{
     int data;
-    struct node *prev;
     struct node *next;
 };
-
-struct node *head;
-
-struct node *GetNewNode(int x){
+void dispalyList(struct node *head){
+    struct node *temp = head;
+    while(temp != NULL){
+        printf("%d->",temp->data);
+        temp = temp->next; 
+    }
+    printf("NULL");
+}
+struct node *insertNode(struct node *head,int i,int data){
     struct node *newnode = (struct node*)malloc(sizeof(struct node));
-    newnode->data = x;
-    newnode->prev = NULL;
-    newnode->next = NULL;
-    return newnode;
-}
-void InsertAtHead(int x){
-    struct node *newNode = GetNewNode(x);
-    if(head == NULL) {
-		head = newNode;
-		return;
-	}
-    head->prev = newNode;
-    newNode->next = head;
-    head = newNode;
-}
-void InsertAttail(int x){
+    newnode->data = data;
+    int count = 0;
     struct node *temp = head;
-    struct node *newnode = GetNewNode(x);
-    if(head == NULL){
+    if( i == 0){
+        newnode->next = head;
         head = newnode;
-        return;
+        return head;
     }
-    while(temp->next != NULL){
+    while(temp != NULL &&count < i-1){
         temp = temp->next;
+        count++;
     }
-    temp->next = newnode;
-    newnode->prev = temp;
+    if(temp != NULL){
+        struct node *a = temp->next;
+        temp->next = newnode;
+        newnode->next = a;
+    }
+    return head;
 }
-void InsertAtPosi(int x,int posi){
-    struct node *temp = head;
-    struct node *newnode = GetNewNode(x);
-    int cnt = 1;
-    while(temp != NULL && cnt < posi - 1){
-        temp =temp->next;
-        cnt++;
+struct node *creatLinkedlist(){
+    int i = 0;
+    struct node *head = NULL;
+    struct node *temp = NULL;
+    struct node *p = NULL;
+    struct node *tail = NULL;
+    int ans;
+    scanf("%d",&ans);
+    while(ans != -1){
+        temp = (struct node*)malloc(sizeof(struct node));
+        temp->data = ans;
+        temp ->next = NULL;
+        if(head == NULL){
+            head = temp;
+            tail = temp;
+        }
+        else{
+
+            tail->next = temp;
+            tail = tail->next;
+        }
+        scanf("%d",&ans);
     }
-    struct node *temp2 = temp->next;
-    temp->next = newnode;
-    temp2->prev = newnode;
-    newnode->prev = temp;
-    newnode->next = temp2;
-}
-void print(){
-    struct node *temp = head;
-    printf("Forward :");
-    while(temp != NULL){
-        printf("%d->",temp->data);
-        temp = temp->next;
-    }
-    printf("NULL");
-    printf("\n");
-}
-void reversePrint(){
-    struct node *temp = head;
-    if(temp == NULL){
-        return;
-    }
-    while(temp->next != NULL){
-        temp = temp->next;
-    }
-    printf("Reverse :");
-    while(temp != NULL){
-        printf("%d->",temp->data);
-        temp = temp->prev;
-    }
-    printf("NULL");
-    printf("\n");
+    return head;
+
 }
 int main()
 {
-    head = NULL;
-    InsertAtHead(2);
-    InsertAttail(3);
-    InsertAttail(4);
-    InsertAttail(5);
-    InsertAtPosi(88,3);
-    print();
-    reversePrint();
+    struct node *HEAD = NULL;
+    HEAD = creatLinkedlist();
+    dispalyList(HEAD);
+    printf("\n");
+    int i,data;
+    scanf("%d",&i);
+    scanf("%d",&data);
+    HEAD = insertNode(HEAD,i,data);
+    dispalyList(HEAD);
     return 0;
 }
