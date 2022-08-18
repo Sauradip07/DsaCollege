@@ -39,6 +39,26 @@ void InsertAttail(int x){
     temp->next = newnode;
     newnode->prev = temp;
 }
+void InsertAtPosi(int x,int posi){
+    struct node *temp = head;
+    struct node *newnode = GetNewNode(x);
+    int cnt = 1;
+    while(temp != NULL && cnt < posi - 1){
+        temp =temp->next;
+        cnt++;
+    }
+    if(temp->next == NULL){
+        temp->next = newnode;
+        newnode->prev = temp;
+    }
+    else{
+        struct node *temp2 = temp->next;
+        temp->next = newnode;
+        temp2->prev = newnode;
+        newnode->prev = temp;
+        newnode->next = temp2;
+    }
+}
 void print(){
     struct node *temp = head;
     printf("Forward :");
@@ -72,6 +92,7 @@ int main()
     InsertAttail(3);
     InsertAttail(4);
     InsertAttail(5);
+    InsertAtPosi(88,5);
     print();
     reversePrint();
     return 0;
