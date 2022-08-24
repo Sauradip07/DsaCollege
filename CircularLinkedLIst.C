@@ -38,12 +38,19 @@ void print(struct node *tail){
 }
 int main()
 {
-    struct node *tail;
-    tail = addToempty(45);
-    tail = addToEnd(tail,5);
-    tail = addToEnd(tail,15);
-    tail = addToEnd(tail,55);
-    tail = addToBeg(tail,7);
+    struct node *tail = NULL;
+    int ans;
+    scanf("%d",&ans);
+    while(ans != -1){
+        if(tail == NULL){
+            tail = addToempty(ans);
+        }
+        else{
+            tail = addToEnd(tail,ans);
+        }
+        scanf("%d",&ans);
+    }
     print(tail);
+    printf("\n");
     return 0;
 }
