@@ -1,52 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 struct node{
-    int data;
-    struct node *next;
+   int data;
+   struct node *next;
 };
-void dispalyList(struct node *head){
-    struct node *temp = head;
-    if(temp != NULL){
-        printf("%d->",temp->data);
-        temp = temp->next;
-    }
-    while(temp != head){
-        printf("%d->",temp->data);
-        temp = temp->next; 
-    };
-    printf("HEAD");
+struct node *addToempty(int data){
+    struct node *temp = malloc(sizeof(struct node));
+    temp->data = data;
+    temp->next = temp;
+    return temp;
 }
-struct node *creatLinkedlist(){
-    int i = 0;
-    struct node *head = NULL;
-    struct node *temp = NULL;
-    struct node *p = NULL;
-    struct node *tail = NULL;
-    int ans;
-    scanf("%d",&ans);
-    while(ans != -1){
-        temp = (struct node*)malloc(sizeof(struct node));
-        temp->data = ans;
-        temp ->next = NULL;
-        if(head == NULL){
-            head = temp;
-            tail = temp;
-        }
-        else{
-            
-            tail->next = temp;
-            tail = tail->next;
-        }
-        scanf("%d",&ans);
-    }
-    tail->next = head;
-    return head;
+struct node *addToBeg(struct node *tail,int data){
+    struct node *newp = malloc(sizeof(struct node));
+    newp->data = data;
+    newp->next = tail->next;
+    tail->next = newp;
+    return tail;
+}
+struct node *addToEnd(struct node *tail,int data){
+    struct node *newp = malloc(sizeof(struct node));
+    newp->data = data;
+    newp->next = NULL;
     
+    newp->next = tail->next;
+    tail->next = newp;
+    tail = tail->next;
+    return tail;
+}
+void print(struct node *tail){
+    struct node *p = tail->next;
+    do{
+        printf("%d->",p->data);
+        p = p->next;
+    }
+    while(p != tail->next);
+    printf("NULL");
 }
 int main()
 {
-    struct node *HEAD = NULL;
-    HEAD = creatLinkedlist();
-    dispalyList(HEAD);
+    struct node *tail;
+    tail = addToempty(45);
+    tail = addToEnd(tail,5);
+    tail = addToEnd(tail,15);
+    tail = addToEnd(tail,55);
+    tail = addToBeg(tail,7);
+    print(tail);
     return 0;
 }
