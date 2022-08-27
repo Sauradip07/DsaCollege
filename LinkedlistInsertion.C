@@ -50,14 +50,14 @@ struct node *creatLinkedlist(){
             tail = temp;
         }
         else{
-            
+
             tail->next = temp;
             tail = tail->next;
         }
         scanf("%d",&ans);
     }
     return head;
-    
+
 }
 int main()
 {
