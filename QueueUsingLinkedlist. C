@@ -83,3 +83,43 @@ int main() {
     }
     return 0;
 }
+/*Implementation of Queue using Linked List
+1. Enqueue
+2. Dequeue
+3. Display
+4. Exit
+
+Enter your choice: 1
+
+Enter the value to insert: 12
+Node is Inserted
+
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+
+Enter your choice: 1
+
+Enter the value to insert: 45
+Node is Inserted
+
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+
+Enter your choice: 1
+
+Enter the value to insert: 56
+Node is Inserted
+
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+
+Enter your choice : 3
+The queue is
+12--->45--->56--->NULL
+/*
